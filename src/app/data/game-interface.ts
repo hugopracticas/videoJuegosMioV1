@@ -49,6 +49,7 @@ export interface Result {
     id:                 number;
     slug:               string;
     name:               string;
+    description:        string;
     released:           Date;
     tba:                boolean;
     background_image:   string;

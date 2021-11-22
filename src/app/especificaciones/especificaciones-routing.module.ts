@@ -6,12 +6,15 @@ import { ImagesComponent } from './images/images.component';
 import { VideosComponent } from './videos/videos.component';
 
 const routes: Routes = [
-  { path: '', component: DetalleComponent,
-    children: [
-      { path: '', component: DescriptionComponent },
-      { path: 'images', component: ImagesComponent },
-      { path: 'videos', component: VideosComponent }
-    ]}
+  {
+    path: '', component: DetalleComponent
+  }
+  // { path: '', component: DetalleComponent,
+  //   children: [
+  //     { path: '', component: DescriptionComponent },
+  //     { path: 'images', component: ImagesComponent },
+  //     { path: 'videos', component: VideosComponent }
+  //   ]}
 ];
 
 @NgModule({

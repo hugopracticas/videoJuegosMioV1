@@ -1,1 +1,42 @@
-<p>description works!</p>
+<div class="game-tabs">
+    <mat-tab-group mat-aling-tabs="start" backgroundColor="primary">
+        <mat-tab label="About">
+            <p *ngIf="game.parent_platforms?.length" class="game-tabs-par">
+                Platforms:
+                <span *ngFor="let game of game.parent_platforms; let last = last">
+                    {{ game.platform.name}}<span *ngIf="!last">,</span>
+                </span>
+            </p>
+            <p *ngIf="game.publishers?.length" class="game-tabs-par">
+                Publishers:
+                <span *ngFor="let publisher of game.publishers; let last = last">
+                    {{ publisher.name }}
+                </span>
+            </p>
+            <p *ngIf="game.website" class="game-tabs-par">
+                Website:
+                <a class="game-tabs-link" href="{{ game.website }}" target="_blank">
+                    {{game.webside}}
+                </a>
+            </p>
+        </mat-tab>
+
+        <mat-tab label="Screenshots" *ngIf="game.screenshots?.length">
+            <img 
+                class="game-screenshot"
+                *ngFor="let screenshot of game.screenshots"
+                src="{{ screenshot.image }}"
+                alt="screenshot"/>
+        </mat-tab>
+
+        <mat-tab label="Trailer">
+            <video class="game-trailer"
+                    controls
+                    *ngFor="let trailer of game.trailers">
+            <source
+                src="{{trailer.data.max}}"
+                type="video/mp4"/>
+            </video>
+        </mat-tab>
+    </mat-tab-group>
+</div>

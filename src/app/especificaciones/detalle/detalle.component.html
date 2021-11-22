@@ -1,19 +1,9 @@
 
 <div class="container">
     <div class="col">
-        <p>
-            {{ game.name }}
-        </p>
+        <img class="img_background" [src]="game.background_image"/>
+        <p>{{game.name}}</p>
     </div>
-    <div class="col">
-        <div>
-            <ul>
-                <li>Descripcion</li>
-                <li>Imagenes</li>
-                <li>Trailes</li>
-            </ul>
-        </div>
-        <router-outlet></router-outlet>
-    </div>
+    <app-description [game]="game"></app-description>
 </div>
 

@@ -6,6 +6,7 @@ import { DetalleComponent } from './detalle/detalle.component';
 import { DescriptionComponent } from './description/description.component';
 import { ImagesComponent } from './images/images.component';
 import { VideosComponent } from './videos/videos.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { VideosComponent } from './videos/videos.component';
   ],
   imports: [
     CommonModule,
-    EspecificacionesRoutingModule
+    EspecificacionesRoutingModule,
+    MatTabsModule
   ]
 })
 export class EspecificacionesModule { }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { GameServicesService } from 'src/app/data/game-services.service';
-import { switchMap, tap } from 'rxjs/operators';
-import { Game, Result } from '../../data/game-interface';
+import { Result } from '../../data/game-interface';
+import { Subscription } from 'rxjs';
+import { Gamee } from '../../data/interface';
 
 @Component({
   selector: 'app-detalle',
@@ -12,42 +13,32 @@ import { Game, Result } from '../../data/game-interface';
 export class DetalleComponent implements OnInit {
   
   // game:Game;
-  game:Result;
+  game: Gamee;
   gameId:string;
+  gameRating = 0;
+  routeSub: Subscription;
+  gameSub: Subscription;
 
   constructor( private service: GameServicesService,
                 private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {
-    // this.activatedRoute.params.subscribe((params: Params )=>{
-    //   this.gameId = params['id'];
-    //   this.getDetail(this.gameId);
-    // })
-    this.activatedRoute.params
-      .pipe(
-        switchMap((param) => this.service.getDetail( param.id )),
-        tap( console.log )
-      ).subscribe( singleGame => this.game = singleGame )
+    this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
+      this.gameId = params['id'];
+      this.getGameDetails(this.gameId);
+    })
   }
 
-  getDetail(){
+  getGameDetails(id: string): void{
+    this.gameSub = this.service.getDetail(id)
+      .subscribe((gameResp: Gamee ) => {
+        this.game = gameResp;
 
+        setTimeout(() => {
+          this.gameRating = this.game.metacritic;
+        }, 1000);
+      })
   }
-  // getDetail(){
-  //   this.activatedRoute.params
-  //     .pipe(
-  //       switchMap((param)=> this.service.getDetail( param.id )),
-  //       tap(console.log)
-  //     )
-  //     .subscribe( objectGame => this.game = objectGame)
-  // }
-
-  // getDetail(id: string): void {
-  //   this.service.getDetail(id)
-  //   .subscribe((gameResponse: Game)=>{
-  //     this.game = gameResponse;
-
-  //   })
-  // }
+  
 
 }
